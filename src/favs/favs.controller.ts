@@ -7,7 +7,6 @@ import {
   Delete,
   ParseUUIDPipe,
   ParseEnumPipe,
-  BadRequestException,
   UnprocessableEntityException,
   NotFoundException,
 } from '@nestjs/common';
