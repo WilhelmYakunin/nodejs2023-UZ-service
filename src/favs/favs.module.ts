@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { FavoritesService } from './favorites.service';
-import { FavoritesController } from './favorites.controller';
+import { FavoritesService } from './favs.service';
+import { FavoritesController } from './favs.controller';
 import { Artist } from 'src/artist/artist.module';
 import { Album } from 'src/album/album.module';
 import { Track } from 'src/track/track.module';
@@ -9,7 +9,7 @@ import { Track } from 'src/track/track.module';
   controllers: [FavoritesController],
   providers: [FavoritesService],
 })
-export class FavoritesModule {}
+export class FavsModule {}
 
 export interface Favorites {
   artists: Artist[] | [];

@@ -7,10 +7,10 @@ class DbModule {
   [x: string]: any;
   constructor(state) {
     this.users = state.users;
-    this.artists = state.users;
-    this.albums = state.users;
-    this.tracks = state.users;
-    this.favorities = state.users;
+    this.artists = state.artists;
+    this.albums = state.albums;
+    this.tracks = state.tracks;
+    this.favorities = state.favorities;
   }
 
   getAllByKey(key) {
@@ -47,8 +47,8 @@ class DbModule {
     return (this[key] = this[key].filter((included) => included.id !== id));
   }
 
-  addToFavs(key, id) {
-    return this[DBEntyties.favorities][key].push(id);
+  addToFavs(key, item) {
+    return this[DBEntyties.favorities][key].push(item);
   }
 
   deleteFromFavs(key, id) {
