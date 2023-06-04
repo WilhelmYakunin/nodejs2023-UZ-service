@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import state from './state';
+import { DBEntyties } from './enums';
 
 @Module({})
 class DbModule {
@@ -31,8 +32,29 @@ class DbModule {
     return (this[key] = newEntyti);
   }
 
+  changeInCaseOfDeletion(key, keyProperty, id) {
+    const newEntyti = this[key].map((el) =>
+      el[keyProperty] === id
+        ? Object.defineProperty(el, keyProperty, {
+            value: null,
+          })
+        : el,
+    );
+    return (this[key] = newEntyti);
+  }
+
   delete(key, id) {
     return (this[key] = this[key].filter((included) => included.id !== id));
+  }
+
+  addToFavs(key, id) {
+    return this[DBEntyties.favorities][key].push(id);
+  }
+
+  deleteFromFavs(key, id) {
+    return (this[DBEntyties.favorities][key] = this[DBEntyties.favorities][
+      key
+    ].filter((included) => included.id !== id));
   }
 }
 

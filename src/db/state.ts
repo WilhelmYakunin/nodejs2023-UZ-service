@@ -1,31 +1,8 @@
 import { User } from 'src/user/user.module';
-
-interface Artist {
-  id: string;
-  name: string;
-  grammy: boolean;
-}
-
-interface Track {
-  id: string;
-  name: string;
-  artistId: string | null;
-  albumId: string | null;
-  duration: number;
-}
-
-interface Album {
-  id: string;
-  name: string;
-  year: number;
-  artistId: string | null;
-}
-
-interface Favorites {
-  artists: Artist[] | [];
-  albums: Album[] | [];
-  tracks: Track[] | [];
-}
+import { Artist } from 'src/artist/artist.module';
+import { Track } from 'src/track/track.module';
+import { Album } from 'src/album/entities/album.entity';
+import { Favorites } from 'src/favorites/favorites.module';
 
 interface AppState {
   users: User[];
