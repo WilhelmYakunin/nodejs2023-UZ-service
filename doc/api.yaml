@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: Home Library Service
   description: Home music library service
-  version: 1.0.0
+  version: 0.0.1
 
 servers:
   - url: /
@@ -239,7 +239,7 @@ paths:
           description: Bad request. body does not contain required fields
         401:
           $ref: '#/components/responses/UnauthorizedError'
-  /users/{userId}:
+  /user/{userId}:
     parameters:
       - name: userId
         in: path

@@ -23,7 +23,6 @@ enum FavsEntyties {
   ALBUM = 'album',
   TRACK = 'track',
 }
-
 @Controller('favs')
 export class FavoritesController {
   constructor(private readonly favoritesService: FavoritesService) {}
