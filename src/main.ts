@@ -2,7 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common/pipes';
 import { AppModule } from './app.module';
 
-import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import { SwaggerModule } from '@nestjs/swagger';
 import * as yaml from 'yaml';
 import * as path from 'path';
 import { readFile } from 'node:fs/promises';
