@@ -6,6 +6,8 @@ import { SwaggerModule } from '@nestjs/swagger';
 import * as yaml from 'yaml';
 import * as path from 'path';
 import { readFile } from 'node:fs/promises';
+import { config } from 'dotenv';
+config();
 import { env } from 'process';
 
 async function bootstrap() {
