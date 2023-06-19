@@ -2,59 +2,77 @@ import { Module } from '@nestjs/common';
 import state from './state';
 import { DBEntyties } from './enums';
 
-@Module({})
-class DbModule {
-  [x: string]: any;
-  constructor(state) {
-    this.users = state.users;
-    this.artists = state.artists;
-    this.albums = state.albums;
-    this.tracks = state.tracks;
-    this.favorities = state.favorities;
+import { Injectable, OnModuleInit, INestApplication } from '@nestjs/common';
+import { PrismaClient } from '@prisma/client';
+
+@Injectable()
+export class PrismaService extends PrismaClient implements OnModuleInit {
+  async onModuleInit() {
+    await this.$connect();
   }
 
+  async enableShutdownHooks(app: INestApplication) {
+    this.$on('beforeExit', async () => {
+      await app.close();
+    });
+  }
+}
+
+@Module({
+  providers: [PrismaService],
+  exports: [PrismaService],
+})
+export class PrismaModule {}
+
+class DbModule {
+  [x: string]: any;
+  constructor(private prisma: PrismaService) {}
+
   getAllByKey(key) {
-    return this[key];
+    return this.prisma[key];
   }
 
   getEntityChildById(key, id) {
-    return this[key].find((included) => included.id === id);
+    return this.prisma[key].find((included) => included.id === id);
   }
 
   addOne(key, newEntytiMember) {
-    return this[key].push(newEntytiMember);
+    return this.prisma[key].push(newEntytiMember);
   }
 
   change(key, newInfo) {
-    const newEntyti = this[key].map((el) =>
+    const newEntyti = this.prisma[key].map((el) =>
       el.id === newInfo.id ? (el = Object.assign(el, newInfo)) : el,
     );
-    return (this[key] = newEntyti);
+    return (this.prisma[key] = newEntyti);
   }
 
   changeInCaseOfDeletion(key, keyProperty, id) {
-    const newEntyti = this[key].map((el) =>
+    const newEntyti = this.prisma[key].map((el) =>
       el[keyProperty] === id
         ? Object.defineProperty(el, keyProperty, {
             value: null,
           })
         : el,
     );
-    return (this[key] = newEntyti);
+    return (this.prisma[key] = newEntyti);
   }
 
   delete(key, id) {
-    return (this[key] = this[key].filter((included) => included.id !== id));
+    return (this.prisma[key] = this.prisma[key].filter(
+      (included) => included.id !== id,
+    ));
   }
 
   addToFavs(key, item) {
-    return this[DBEntyties.favorities][key].push(item);
+    return this.prisma[DBEntyties.favorities][key].push(item);
   }
 
   deleteFromFavs(key, id) {
-    return (this[DBEntyties.favorities][key] = this[DBEntyties.favorities][
-      key
-    ].filter((included) => included.id !== id));
+    console.log(key, 'id: ', id);
+    return (this.prisma[DBEntyties.favorities][key] = this.prisma[
+      DBEntyties.favorities
+    ][key].filter((included) => included.id !== id));
   }
 }
 

@@ -13,10 +13,9 @@ import {
 import { FavoritesService } from './favs.service';
 
 import db from '../db/db.module';
-import { Artist } from 'src/artist/artist.module';
-import { Album } from 'src/album/album.module';
-import { Track } from 'src/track/track.module';
-import { DBEntyties } from 'src/db/enums';
+import { Artist } from '../artist/artist.module';
+import { Album } from '../album/album.module';
+import { Track } from '../track/track.module';
 
 enum FavsEntyties {
   ARTIST = 'artist',
@@ -65,9 +64,10 @@ export class FavoritesController {
     entyti: string,
   ) {
     const normalizedEntytikey = entyti + 's';
-    const item: Artist | Album | Track = db[DBEntyties.favorities][
-      normalizedEntytikey
-    ].find((included) => included.id === id);
+    const all = this.favoritesService.findAll();
+    const item: Artist | Album | Track = all[normalizedEntytikey].find(
+      (included) => included.id === id,
+    );
     if (!item) throw new NotFoundException();
     return this.favoritesService.remove(normalizedEntytikey, id);
   }

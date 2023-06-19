@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateAlbumDto } from './dto/create-album.dto';
 
 import state from '../db/db.module';
-import { DBEntyties } from 'src/db/enums';
+import { DBEntyties } from '../db/enums';
 
 import { v4 } from 'uuid';
 import { Album } from './album.module';

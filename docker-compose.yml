@@ -1,0 +1,41 @@
+version: '3.9'
+
+services:
+  node:
+    container_name: app
+    image: library:app
+    restart: unless-stopped
+    depends_on:
+      - db
+    build: ./
+    env_file:
+      - .env
+    ports:
+      - ${PORT}:${PORT}
+    volumes:
+      - node-modules:/usr/app/node_modules
+    networks:
+      - net
+  
+  db:
+    container_name: db
+    image: library:db
+    restart: unless-stopped
+    build: ./db
+    env_file:
+      - .env
+    ports:
+      - '${POSTGRES_PORT}:${POSTGRES_PORT}'
+    volumes:
+      - data:/var/lib/postgresql/data
+      - logs:/var/lib/postgresql/logs
+    networks:
+      - net
+volumes:
+  node-modules:
+  logs:
+  data:
+networks:
+  net:
+    driver: bridge
+

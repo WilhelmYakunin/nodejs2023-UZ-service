@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 
 import state from '../db/db.module';
-import { DBEntyties } from 'src/db/enums';
-import { Album } from 'src/album/album.module';
-import { Artist } from 'src/artist/artist.module';
-import { Track } from 'src/track/track.module';
+import { DBEntyties } from '../db/enums';
+import { Album } from '../album/album.module';
+import { Artist } from '../artist/artist.module';
+import { Track } from '../track/track.module';
 
 const favsKey = DBEntyties.favorities;
 
