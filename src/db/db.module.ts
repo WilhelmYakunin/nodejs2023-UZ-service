@@ -69,6 +69,7 @@ class DbModule {
   }
 
   deleteFromFavs(key, id) {
+    console.log(key, id);
     return (this.prisma[DBEntyties.favorities][key] = this.prisma[
       DBEntyties.favorities
     ][key].filter((included) => included.id !== id));

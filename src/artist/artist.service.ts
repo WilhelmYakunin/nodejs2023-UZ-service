@@ -40,6 +40,7 @@ export class ArtistService {
     state.changeInCaseOfDeletion(traksKey, 'artistId', id);
     state.changeInCaseOfDeletion(albumsKey, 'artistId', id);
     state.changeInCaseOfDeletion(albumsKey, 'albumId', id);
+    state.deleteFromFavs(aristsKey, id);
     return state.delete(aristsKey, id);
   }
 }

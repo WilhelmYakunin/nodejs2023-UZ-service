@@ -37,6 +37,7 @@ export class TrackService {
   }
 
   remove(id: string) {
+    state.deleteFromFavs(tracksKey, id);
     return state.delete(tracksKey, id);
   }
 }

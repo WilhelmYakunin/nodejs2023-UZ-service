@@ -38,6 +38,7 @@ export class AlbumService {
   remove(id: string) {
     const traksKey = DBEntyties.tracks;
     state.changeInCaseOfDeletion(traksKey, 'albumId', id);
+    state.deleteFromFavs(albumsKey, id);
     return state.delete(albumsKey, id);
   }
 }

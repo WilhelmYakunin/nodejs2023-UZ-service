@@ -2,8 +2,8 @@ version: '3.9'
 
 services:
   node:
-    image: vitalii_iakunin/home-library:app
-    container_name: app
+    container_name: nodejs2023-service
+    image: vitalijiakunin/nodejs2023-service
     build: ./
     restart: unless-stopped
     env_file:
@@ -19,8 +19,8 @@ services:
       - net
   
   db:
-    image: vitalii_iakunin/home-library:db
-    container_name: db
+    container_name: nodejs2023-docker-db
+    image: vitilijiakunin/nodejs2023-docker-db
     build: ./db
     restart: unless-stopped
     env_file:
