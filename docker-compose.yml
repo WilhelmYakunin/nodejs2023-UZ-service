@@ -2,40 +2,42 @@ version: '3.9'
 
 services:
   node:
+    image: vitalii_iakunin/home-library:app
     container_name: app
-    image: library:app
-    restart: unless-stopped
-    depends_on:
-      - db
     build: ./
+    restart: unless-stopped
     env_file:
       - .env
     ports:
       - ${PORT}:${PORT}
     volumes:
+      - .:/usr/app/
       - node-modules:/usr/app/node_modules
+    depends_on:
+      - db
     networks:
       - net
   
   db:
+    image: vitalii_iakunin/home-library:db
     container_name: db
-    image: library:db
-    restart: unless-stopped
     build: ./db
+    restart: unless-stopped
     env_file:
       - .env
     ports:
       - '${POSTGRES_PORT}:${POSTGRES_PORT}'
     volumes:
-      - data:/var/lib/postgresql/data
-      - logs:/var/lib/postgresql/logs
+      - data:/db/data
+      - logs:/db/logs
     networks:
       - net
+
 volumes:
   node-modules:
   logs:
   data:
+
 networks:
   net:
     driver: bridge
-
