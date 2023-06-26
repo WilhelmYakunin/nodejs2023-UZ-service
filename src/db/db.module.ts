@@ -32,6 +32,12 @@ class DbModule {
     return this.prisma[key];
   }
 
+  getUserByLogin(login) {
+    return this.prisma[DBEntyties.users].find(
+      (included) => included.login === login,
+    );
+  }
+
   getEntityChildById(key, id) {
     return this.prisma[key].find((included) => included.id === id);
   }
@@ -69,7 +75,6 @@ class DbModule {
   }
 
   deleteFromFavs(key, id) {
-    console.log(key, id);
     return (this.prisma[DBEntyties.favorities][key] = this.prisma[
       DBEntyties.favorities
     ][key].filter((included) => included.id !== id));

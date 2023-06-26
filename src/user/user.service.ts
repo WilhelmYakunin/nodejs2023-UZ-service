@@ -33,6 +33,10 @@ export class UserService {
     return state.getEntityChildById(usersKey, id);
   }
 
+  findOneByLogin(login: string) {
+    return state.getUserByLogin(login);
+  }
+
   update(newInfo) {
     const { version } = newInfo;
 
