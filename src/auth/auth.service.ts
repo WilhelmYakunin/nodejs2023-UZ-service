@@ -11,6 +11,7 @@ import { User } from 'src/user/user.module';
 
 @Injectable()
 export class AuthService {
+  [x: string]: any;
   async signup(createUserDto: CreateUserDto) {
     const { login, password } = createUserDto;
     const hashPassword = await hash(password, +env.CRYPT_SALT);
